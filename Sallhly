@@ -1,0 +1,49 @@
+/* مشروع Next.js احترافي لموقع صلحلي */
+
+// --- next.config.js --- const nextConfig = { i18n: { locales: ['ar', 'en'], defaultLocale: 'ar', }, }; module.exports = nextConfig;
+
+// --- tailwind.config.js --- module.exports = { content: ['./pages//*.{js,ts,jsx,tsx}', './components//*.{js,ts,jsx,tsx}'], theme: { extend: { fontFamily: { arabic: ['"Cairo"', 'sans-serif'], }, }, }, plugins: [], };
+
+// --- components/WhatsAppButton.js --- import React from 'react';
+
+export default function WhatsAppButton() { return ( <a
+href="https://wa.me/966500000000"
+className="fixed bottom-4 left-4 bg-green-500 text-white p-3 rounded-full shadow-lg hover:bg-green-600 transition z-50"
+target="_blank"
+rel="noopener noreferrer"
+> واتساب </a> ); }
+
+// --- components/Testimonials.js --- export default function Testimonials() { const testimonials = [ { name: 'أحمد الحربي', message: 'خدمة ممتازة وسريعة جدًا! أنصح بالتعامل معهم.', }, { name: 'فاطمة الزهراني', message: 'الموظفين محترفين والعمل نظيف جدًا. شكراً لكم.', }, ];
+
+return ( <section className="mt-10 bg-white p-6 rounded shadow"> <h3 className="text-xl font-semibold mb-4">آراء العملاء</h3> <div className="space-y-4"> {testimonials.map((item, idx) => ( <div key={idx} className="border-b pb-2"> <p className="font-bold">{item.name}</p> <p>{item.message}</p> </div> ))} </div> </section> ); }
+
+// --- pages/index.js --- import Head from 'next/head'; import Link from 'next/link'; import WhatsAppButton from '../components/WhatsAppButton'; import Testimonials from '../components/Testimonials';
+
+export default function Home() { return ( <div className="font-arabic bg-gray-100 min-h-screen"> <Head> <title>صلّحلي - الرئيسية</title> </Head> <header className="bg-white shadow p-4 flex justify-between items-center"> <h1 className="text-2xl font-bold">صلّحلي</h1> <nav className="space-x-4"> <Link href="/about">من نحن</Link> <Link href="/gallery">معرض الصور</Link> <Link href="/dashboard">لوحة التحكم</Link> </nav> </header>
+
+<main className="p-6">
+    <h2 className="text-xl mb-4">مرحبا بكم في صلّحلي، أفضل خدمات الصيانة والبناء</h2>
+    <p>نحن نقدم عمالة ماهرة لصيانة المنازل، الترميمات، والكثير من الخدمات.</p>
+
+    <Testimonials />
+  </main>
+
+  <WhatsAppButton />
+</div>
+
+); }
+
+// --- pages/about.js --- export default function About() { return ( <div className="p-6 font-arabic"> <h1 className="text-2xl mb-2">من نحن</h1> <p>نحن فريق متخصص في تقديم خدمات البناء والصيانة للأفراد والشركات.</p> </div> ); }
+
+// --- pages/gallery.js --- export default function Gallery() { return ( <div className="p-6 font-arabic"> <h1 className="text-2xl mb-2">معرض الصور</h1> <p>صور لمشاريعنا السابقة ستُعرض هنا.</p> </div> ); }
+
+// --- pages/dashboard.js --- export default function Dashboard() { return ( <div className="p-6 font-arabic"> <h1 className="text-2xl mb-2">لوحة التحكم</h1> <p>يمكنك هنا إدارة المحتوى، الصور، والخدمات.</p> </div> ); }
+
+// --- styles/globals.css --- @tailwind base; @tailwind components; @tailwind utilities;
+
+body { direction: rtl; font-family: 'Cairo', sans-serif; background-color: #f9fafb; }
+
+// --- public/locales/ar/common.json --- { "welcome": "مرحبا بكم في صلّحلي" }
+
+// --- public/locales/en/common.json --- { "welcome": "Welcome to Sallehli" }
+
